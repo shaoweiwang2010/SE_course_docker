@@ -28,7 +28,7 @@ docker run -d -p 8761:8761 springcloud/eureka
 ```
 
 ```
-docker run -d -e MYSQL_ROOT_PASSWORD=dummypassword -e MYSQL_USER=todos-user -e MYSQL_PASSWORD=dummytodos -e MYSQL_DATABASE=todos --p 3306:3306 mysql:5.7
+docker run -d -e MYSQL_ROOT_PASSWORD=dummypassword -e MYSQL_USER=todos-user -e MYSQL_PASSWORD=dummytodos -e MYSQL_DATABASE=todos -p 3306:3306 mysql:5.7
 ```
 
 #### Traditional Deployment
