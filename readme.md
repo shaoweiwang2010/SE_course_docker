@@ -112,13 +112,16 @@ docker run -d -e MYSQL_ROOT_PASSWORD=dummypassword -e MYSQL_USER=todos-user -e M
 
 ### Step 04 - Manually creating a new docker image
 
+
 ```
   716  docker run -dit openjdk:8-jdk-alpine
+  ##openjdk:8-jdk-alpine 's name is romantic_aryabhata
+  
   720  docker container cp target/docker-in-5-steps-todo-rest-api-h2-1.0.0.RELEASE.jar 28d5e5d893fdb1530e9920ff66fee252adc834a8b572b77b3fdf7d316730127c:/tmp
   725  docker container exec romantic_aryabhata ls /tmp
     734  docker container commit romantic_aryabhata in28min/manual-todo-rest-api:v1
-  735  docker container commit --change='CMD ["java","-jar","/tmp/docker-in-5-steps-todo-rest-api-h2-1.0.0.RELEASE.jar"]' romantic_aryabhata in28min/manual-todo-rest-api:v2
-  !!!note that in windows:  use "CMD " instead of 'CDM ']  see https://stackoverflow.com/questions/60008200/docker-commit-requires-at-least-1-and-at-most-2-arguments
+  735  docker container commit --change='CMD exec java -jar /tmp/docker-in-5-steps-todo-rest-api-h2-1.0.0.RELEASE.jar' romantic_aryabhata in28min/manual-todo-rest-api:v2
+  ##see https://stackoverflow.com/questions/60008200/docker-commit-requires-at-least-1-and-at-most-2-arguments
   
   743  docker run -d -p 5000:5000 in28min/manual-todo-rest-api:v2
 ```
