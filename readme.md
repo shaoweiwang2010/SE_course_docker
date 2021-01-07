@@ -118,8 +118,12 @@ docker run -d -e MYSQL_ROOT_PASSWORD=dummypassword -e MYSQL_USER=todos-user -e M
   725  docker container exec romantic_aryabhata ls /tmp
     734  docker container commit romantic_aryabhata in28min/manual-todo-rest-api:v1
   735  docker container commit --change='CMD ["java","-jar","/tmp/docker-in-5-steps-todo-rest-api-h2-1.0.0.RELEASE.jar"]' romantic_aryabhata in28min/manual-todo-rest-api:v2
+  !!!note that in windows:  use "CMD " instead of 'CDM ']  see https://stackoverflow.com/questions/60008200/docker-commit-requires-at-least-1-and-at-most-2-arguments
+  
   743  docker run -d -p 5000:5000 in28min/manual-todo-rest-api:v2
 ```
+
+
 
 ### Step 05 : Containerizing Spring Boot Application using Dockerfile and Spotify Maven Plugin
 
