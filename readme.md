@@ -6,8 +6,8 @@ Let's learn Docker in 4 Easy Steps.
 - Step 00 - Installing Docker
 - Step 01 - A simple Docker use case - Run an existing application
 - Step 02 - Playing with Docker - Containers and Images
-- Step 03 - How does Docker work?
-- Step 04 - Manually creating a docker image
+- Step 03 - Manually creating a docker image
+- Step 04 – Push image to docker hub
 
 
 ### Step 00 - Installing Docker
@@ -72,7 +72,7 @@ docker tag webapp:v1 shaoweiwang2020/web_app1:v2
 docker push shaoweiwang2020/web_app1:v2
 ```
 
-More reference
+## More reference:
 https://docs.docker.com/docker-hub/repos/#:~:text=To%20push%20an%20image%20to,docs%2Fbase%3Atesting%20).
 https://stackoverflow.com/questions/41984399/denied-requested-access-to-the-resource-is-denied-docker
 Video - https://www.youtube.com/watch?v=Rt5G5Gj7RP0
