@@ -24,14 +24,6 @@ mysql -u root –p
 ```
 
 
-#### Traditional Deployment
-
-![Traditional Deployment](images/docker-traditional-deployment.png)
-
-#### Deployment with Docker
-
-![Docker Deployment](images/docker-zz-deployment.png)
-
 
 ### Step 02 - Playing with Docker - Containers and Images
 
