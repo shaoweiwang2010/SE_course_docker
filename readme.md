@@ -21,7 +21,7 @@ Let's learn Docker in 4 Easy Steps.
 docker pull mysql:5.7   
 docker run --name mysql_5.7 -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7 
 docker exec -it mysql_5.7 bash
-mysql -u root –p
+mysql -u root -p
 ```
 
 
