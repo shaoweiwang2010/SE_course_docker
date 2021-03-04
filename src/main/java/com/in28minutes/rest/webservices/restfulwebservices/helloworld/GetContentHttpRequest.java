@@ -17,77 +17,77 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
-
-
 public class GetContentHttpRequest {
 
-  public static void main(String[] args) {
-	  String name = "java";
-	  String url = "https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged="+name+"&site=stackoverflow";
-		
-	  System.out.println(getResponseContent(url));
-  }
-  
+	public static void main(String[] args) {
+		String name = "java";
+		String url = "https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=" + name
+				+ "&site=stackoverflow";
+
+		System.out.println(getResponseContent(url));
+	}
+
 //the code gets from http://wpcertification.blogspot.com/2010/06/decoding-gziped-response-in-httpclient.html
 
-  public static String getResponseContent(String url) {
-	  HttpClient client = new HttpClient();
+	public static String getResponseContent(String url) {
+		HttpClient client = new HttpClient();
 
-	    HttpMethod method = new GetMethod(url);
-	     method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, 
-	            new DefaultHttpMethodRetryHandler(3, false));
-	     method.addRequestHeader("Accept-Encoding", "gzip");
-	     System.out.println("Setting gzip header explicitiy");
-	     
-	        try {
-	          int statusCode = client.executeMethod(method);
+		HttpMethod method = new GetMethod(url);
+		method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler(3, false));
 
-	          if (statusCode != HttpStatus.SC_OK) {
-	            System.err.println("Method failed: " + method.getStatusLine());
-	          }
-	          Header[] responseHeader = method.getResponseHeaders();
-	         // for(int i = 0 ; i < responseHeader.length ;i++){
-	         //   Header header = responseHeader[i];
-	         //   System.out.println(header.getName() +" " + header.getValue());
-	         // }
-	          String responseBody  = GetContentHttpRequest.getResponseBody(method);
-	          
-	          return responseBody;
+		method.addRequestHeader("Accept-Encoding", "gzip");
+		System.out.println("Setting gzip header explicitiy");
 
-	        } catch (HttpException e) {
-	          System.err.println("Fatal protocol violation: " + e.getMessage());
-	          e.printStackTrace();
-	        } catch (IOException e) {
-	          System.err.println("Fatal transport error: " + e.getMessage());
-	          e.printStackTrace();
-	        } finally {
-	          // Release the connection.
-	          method.releaseConnection();
-	        }  
-	      return "error";
-  }
-  
-  // docompress content returned, the default response content is compressed in gzip
+		try {
+			int statusCode = client.executeMethod(method);
 
-  public static String getResponseBody(HttpMethod method) throws IOException{
-    Header contentEncoding = method.getResponseHeader("Content-Encoding");
-    System.out.println("Value of Content-encoding header " + contentEncoding);
-    if(contentEncoding !=  null ){
-      String acceptEncodingValue = contentEncoding.getValue();
-      if(acceptEncodingValue.indexOf("gzip") != -1){
-      System.out.println("This is gzipped content  " );
-      StringWriter responseBody = new StringWriter();
-      PrintWriter responseWriter = new PrintWriter(responseBody);
-      GZIPInputStream zippedInputStream =  new GZIPInputStream(method.getResponseBodyAsStream());
-        BufferedReader r = new BufferedReader(new InputStreamReader(zippedInputStream));
-        String line = null;
-          while( (line =r.readLine()) != null){
-            responseWriter.println(line);
-         }
-          return responseBody.toString();
-      }
-    }
-    System.out.println("The response is not zipped");
-    return method.getResponseBodyAsString();
-  }
+			if (statusCode != HttpStatus.SC_OK) {
+				System.err.println("Method failed: " + method.getStatusLine());
+			}
+			// Header[] responseHeader = method.getResponseHeaders();
+			// for(int i = 0 ; i < responseHeader.length ;i++){
+			// Header header = responseHeader[i];
+			// System.out.println(header.getName() +" " + header.getValue());
+			// }
+			String responseBody = GetContentHttpRequest.getResponseBody(method);
+
+			return responseBody;
+
+		} catch (HttpException e) {
+			System.err.println("Fatal protocol violation: " + e.getMessage());
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.err.println("Fatal transport error: " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			// Release the connection.
+			method.releaseConnection();
+		}
+		return "error";
+	}
+
+	// docompress response content, the default response content is compressed in gzip
+	
+
+	public static String getResponseBody(HttpMethod method) throws IOException {
+		Header contentEncoding = method.getResponseHeader("Content-Encoding");
+		System.out.println("Value of Content-encoding header " + contentEncoding);
+		if (contentEncoding != null) {
+			String acceptEncodingValue = contentEncoding.getValue();
+			if (acceptEncodingValue.indexOf("gzip") != -1) {
+				System.out.println("This is gzipped content  ");
+				StringWriter responseBody = new StringWriter();
+				PrintWriter responseWriter = new PrintWriter(responseBody);
+				GZIPInputStream zippedInputStream = new GZIPInputStream(method.getResponseBodyAsStream());
+				BufferedReader r = new BufferedReader(new InputStreamReader(zippedInputStream));
+				String line = null;
+				while ((line = r.readLine()) != null) {
+					responseWriter.println(line);
+				}
+				return responseBody.toString();
+			}
+		}
+		System.out.println("The response is not zipped");
+		return method.getResponseBodyAsString();
+	}
 }
