@@ -48,7 +48,7 @@ public class HelloWorldController {
 		
 		// TODO:  extract post information from content, which is json format
 		
-		
+		// TODO: organize the posts based on requirements and output as HTML page
 		
 		return new HelloWorldBean(content);
 	

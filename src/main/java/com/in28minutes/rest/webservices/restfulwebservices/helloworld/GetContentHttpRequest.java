@@ -17,6 +17,8 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
+
+
 public class GetContentHttpRequest {
 
   public static void main(String[] args) {
@@ -25,6 +27,9 @@ public class GetContentHttpRequest {
 		
 	  System.out.println(getResponseContent(url));
   }
+  
+//the code gets from http://wpcertification.blogspot.com/2010/06/decoding-gziped-response-in-httpclient.html
+
   public static String getResponseContent(String url) {
 	  HttpClient client = new HttpClient();
 
@@ -62,7 +67,7 @@ public class GetContentHttpRequest {
 	      return "error";
   }
   
-  
+  // docompress content returned, the default response content is compressed in gzip
 
   public static String getResponseBody(HttpMethod method) throws IOException{
     Header contentEncoding = method.getResponseHeader("Content-Encoding");
